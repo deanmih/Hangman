@@ -91,7 +91,8 @@ function checkForLetter() {
     let discardedLetter = this.id;
     engLetters = engLetters.split(discardedLetter).join('');
     
-    let lossIndex = 0, winIndex = 0;
+    let lossIndex = 0;
+    let winIndex = 0;
     if (hpPts == 0 && letterMatches < chosenWord.length) {
         let loseMessage = document.createElement("div");
         loseMessage.style.background = "white";
