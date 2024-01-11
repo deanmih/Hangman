@@ -1,7 +1,10 @@
-let words = ["car", "mountain", "javascript"], chosenWord, chosenPosition;
+let words = ["car", "mountain", "javascript", "Alabama"];
+let engLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";; 
+let chosenWord, chosenPosition;
+
 function randomizeWord() {
     chosenPosition = Math.floor(Math.random() * words.length);
-    chosenWord = words[chosenPosition].toString();
+    chosenWord = words[chosenPosition].toString().toUpperCase();
     
     let hpText = document.createElement("div");
     hpText.style.background = "white";
@@ -44,7 +47,6 @@ function randomizeWord() {
     instructionsTxt.style.marginTop = "5%";
     document.body.appendChild(instructionsTxt);
 
-    let engLetters = "abcdefghijklmnopqrstuvwxyz";
     for (let i = 0; i < 26; ++i) { 
         let pickLetterBtn = document.createElement("button");
         pickLetterBtn.innerHTML = engLetters[i];
@@ -86,6 +88,12 @@ function checkForLetter() {
         document.getElementById("hpPts").innerText = hpPts;
     } 
     document.getElementById(this.id).remove();
+    let discardedLetter = this.id;
+    engLetters = engLetters.split(discardedLetter).join('');
+    console.log(engLetters);
+    
+    let lossIndex = 0;
+    let winIndex = 0;
     if (hpPts == 0 && letterMatches < chosenWord.length) {
         let loseMessage = document.createElement("div");
         loseMessage.style.background = "white";
@@ -100,6 +108,7 @@ function checkForLetter() {
         loseMessage.style.lineHeight = "80px";
         loseMessage.style.fontFamily = "Georgia";
         document.body.appendChild(loseMessage);
+        ++lossIndex;
     } 
     if (letterMatches == chosenWord.length) {
         let winMessage = document.createElement("div");
@@ -114,7 +123,8 @@ function checkForLetter() {
         winMessage.style.verticalAlign = "middle";
         winMessage.style.lineHeight = "80px";
         winMessage.style.fontFamily = "Georgia";
-        document.body.appendChild(winMessage); 
+        document.body.appendChild(winMessage);
+        ++winIndex;
     }
     if (hpPts == 0 || letterMatches == chosenWord.length) {
         let gameRestartBtn = document.createElement("button");
@@ -129,6 +139,10 @@ function checkForLetter() {
         gameRestartBtn.addEventListener("click", refreshGame);
         document.body.appendChild(gameRestartBtn);
     }
+    for (let i = 0; winIndex == 1 && i < engLetters.length || lossIndex == 1 && i < engLetters.length; ++i) {
+        document.getElementById(engLetters[i]).disabled = true;
+    }
+    document.getElementById("generateGame").disabled = true;
 }
 
 function refreshGame() {
