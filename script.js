@@ -1,5 +1,4 @@
 let words = ["car", "mountain", "javascript"], chosenWord, chosenPosition;
-
 function randomizeWord() {
     chosenPosition = Math.floor(Math.random() * words.length);
     chosenWord = words[chosenPosition].toString();
@@ -16,7 +15,7 @@ function randomizeWord() {
     hpText.style.lineHeight = "30px";
     hpText.style.fontFamily = "Georgia";
     document.body.appendChild(hpText);
-
+    
     let showHp = document.createElement("div");
     showHp.style.background = "white";
     showHp.style.height = "70px";
@@ -57,7 +56,6 @@ function randomizeWord() {
     }
 
     document.body.appendChild(document.createElement("div"));
-
     for (let i = 0; i < chosenWord.length; ++i) { 
         let wordLetterBtn = document.createElement("button");
         wordLetterBtn.style.background = "white";
@@ -74,9 +72,7 @@ function randomizeWord() {
     }
 }
 
-let hpPts = 7;
-let letterMatches = 0;
-
+let hpPts = 7, letterMatches = 0;
 function checkForLetter() {
     for (let i = 0; chosenWord.includes(this.id) == true && i < chosenWord.length; ++i) {
         if (this.id == chosenWord[i]) {
