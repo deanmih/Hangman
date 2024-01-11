@@ -2,6 +2,7 @@ let words = ["car", "mountain", "javascript"], chosenWord, chosenPosition;
 function randomizeWord() {
     chosenPosition = Math.floor(Math.random() * words.length);
     chosenWord = words[chosenPosition].toString();
+    
     let hpText = document.createElement("div");
     hpText.style.background = "white";
     hpText.style.height = "30px";
